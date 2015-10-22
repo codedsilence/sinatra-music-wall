@@ -1,0 +1,37 @@
+<% @tracks.each do |track| %>
+  <div class="track">
+    <p><%= current_user.name %></p>
+    <p><a href="/track/<%= track.id %>"></a> 
+      <small><%= track.artist %></small></p>
+      <p><%= track.title %></p>
+    <a href="<%= track.url %>"><%= track.url %></a>
+    <% if current_user.upvotes.find_by(track_id: track.id) %>
+    <% else %>
+    <form method="post" action="/track/<%= track.id %>/upvote">
+    <button>UPVOTE!</button>
+    </form>
+    <% end %>
+  
+  </div>
+<% end %>
+
+
+<div class="container">
+<h1>POST A NEW SONG!</h1>
+<form method="post" action="/tracks">
+  <div>
+    <label>Author:</label>
+    <input type="text" name="artist">
+  </div>
+  <div>
+    <label>Title:</label>
+    <input type="text" name="title">
+  </div>
+  <div>
+    <label>URL:</label>
+    <input type="text" name="url">
+  </div>
+  <div>
+    <input type="submit" value="Submit">
+  </div>
+</form>
